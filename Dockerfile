@@ -7,7 +7,7 @@
 FROM node:20 AS build
 
 WORKDIR /app
-COPY package*.json crm
+COPY package*.json cms
 RUN npm install
 COPY . .
 RUN npm run build
