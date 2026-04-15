@@ -8,10 +8,10 @@ FROM node:18 AS build
 WORKDIR /app
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
-COPY cms/package*.json ./
+COPY package*.json ./
 RUN npm install
 
-COPY cms/ .
+COPY . .
 RUN npm run build
 
 # Runtime stage
