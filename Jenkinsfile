@@ -57,7 +57,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh """
-                docker build -t ${DOCKERHUB_USER}/${IMAGE}:${BUILD_NUMBER} .
+                docker build -t ${DOCKERHUB_USER}/${IMAGE}:${BUILD_NUMBER} .cms
                 """
             }
         }
