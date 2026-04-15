@@ -3,12 +3,15 @@
 # =========================================================
 
 # Build stage
-FROM node:20 AS build
+FROM node:18 AS build
 
 WORKDIR /app
-COPY package*.json ./
+
+ENV NODE_OPTIONS=--openssl-legacy-provider
+COPY cms/package*.json ./
 RUN npm install
-COPY . .
+
+COPY cms/ .
 RUN npm run build
 
 # Runtime stage
