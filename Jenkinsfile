@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         DOCKERHUB_USER = "lakshvar96"
-        IMAGE = "ems"
+        FRONTENDIMAGE = "ems1"
+        BACKENDIMAGE = "ems2"
         GIT_REPO = "https://github.com/Lakshmanan1996/EmployeManagementSystem.git"
     }
 
@@ -57,7 +58,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh """
-                docker build -t ${DOCKERHUB_USER}/${IMAGE}:${BUILD_NUMBER} ./cms
+                docker build -t ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} ./cms
+                docker build -t ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} .
                 """
             }
         }
@@ -67,7 +69,8 @@ pipeline {
         stage('Trivy Scan') {
             steps {
                 sh """
-                trivy image ${DOCKERHUB_USER}/${IMAGE}:${BUILD_NUMBER}
+                trivy image ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER}
+                trivy image ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER}
                 """
             }
         }
@@ -90,7 +93,8 @@ pipeline {
         stage('Push Image') {
             steps {
                 sh """
-                docker push ${DOCKERHUB_USER}/${IMAGE}:${BUILD_NUMBER}
+                docker push ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER}
+                docker push ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER}
                 """
             }
         }
