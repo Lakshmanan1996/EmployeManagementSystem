@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://34.143.129.68:3000")
 @RestController
 @RequestMapping("/api/v1/employees")
 public class EmployeeController {
