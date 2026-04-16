@@ -58,8 +58,8 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh """
-                docker build -t ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} 
-                docker build -t ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} 
+                docker build -t ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} ./cms
+                docker build -t ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} .
                 """
             }
         }
@@ -69,8 +69,8 @@ pipeline {
         stage('Trivy Scan') {
             steps {
                 sh """
-                trivy image ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} ./cms
-                trivy image ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} .
+                trivy image ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} 
+                trivy image ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} 
                 """
             }
         }
