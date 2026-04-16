@@ -59,7 +59,7 @@ pipeline {
             steps {
                 sh """
                 docker build -t ${DOCKERHUB_USER}/${FRONTENDIMAGE}:${BUILD_NUMBER} ./cms
-                docker build -t ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} ./cms/src
+                docker build -t ${DOCKERHUB_USER}/${BACKENDIMAGE}:${BUILD_NUMBER} .
                 """
             }
         }
